@@ -1,5 +1,4 @@
 const express = require("express");
-const helmet = require("helmet");
 const session = require("express-session");
 const cors = require("cors");
 const KnexSessionStore = require("connect-session-knex")(session)
@@ -9,7 +8,6 @@ const authRouter = require("./auth/auth-router");
 
 const server = express();
 
-server.use(helmet());
 server.use(express.json());
 server.use(cors());
 server.use(session({
@@ -23,7 +21,7 @@ server.use(session({
   resave: false, 
   saveUninitialized: false, 
   store: new KnexSessionStore({
-    knex: require('../database/connection.js'),
+    knex: require('../data/connection.js'),
     tablename: 'cleveland',
     sidfieldname: 'cavs', 
     createtable: true, 
